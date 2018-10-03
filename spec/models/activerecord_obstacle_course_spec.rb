@@ -102,11 +102,11 @@ describe 'ActiveRecord Obstacle Course' do
     ids = [item_1.id, item_2.id, item_4.id]
 
     # ----------------------- Using Ruby -------------------------
-    items = Item.all.select { |item| ids.include?(item.id) }
+    # items = Item.all.select { |item| ids.include?(item.id) }
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    items = Item.where(id: ids)
     # ------------------------------------------------------------
 
     # Expectation
