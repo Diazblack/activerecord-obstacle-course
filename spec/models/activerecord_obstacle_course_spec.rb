@@ -118,11 +118,11 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = [order_1, order_3, order_5, order_7]
 
     # ----------------------- Using Ruby -------------------------
-    orders = Order.all.select { |order| ids.include?(order.id) }
+    # orders = Order.all.select { |order| ids.include?(order.id) }
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    orders = Order.find(ids)
     # ------------------------------------------------------------
 
     # Expectation
