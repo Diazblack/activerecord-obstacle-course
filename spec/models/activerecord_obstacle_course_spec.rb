@@ -215,11 +215,11 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = [item_1, item_2, item_7, item_8, item_9, item_10]
 
     # ----------------------- Using Ruby -------------------------
-    items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
+
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    items = Item.where.not(id: items_not_included)
     # ------------------------------------------------------------
 
     # Expectation
@@ -231,11 +231,11 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ----------------------- Using Ruby -------------------------
     order = Order.find(3)
-    grouped_items = order.items.sort_by { |item| item.name }
+    # grouped_items = order.items.sort_by { |item| item.name }
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+      grouped_items = order.items.order(:name)
     # ------------------------------------------------------------
 
     # Expectation
