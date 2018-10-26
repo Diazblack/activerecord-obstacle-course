@@ -433,7 +433,7 @@ describe 'ActiveRecord Obstacle Course' do
     # -----------------------------------------------------------
 
     # ------------------ Improved Solution ----------------------
-    #  Solution goes here
+
     # -----------------------------------------------------------
 
     # Expectation
