@@ -506,7 +506,7 @@ describe 'ActiveRecord Obstacle Course' do
     # When you find a solution, experiment with adjusting your method chaining
     # Which ones are you able to switch around without relying on Ruby's Enumerable methods?
     ordered_items_names = Item.joins(:orders).includes(:orders).distinct.pluck(:name)
-
+    # ask instructors about diferences between uniq and distinct
     # ---------------------------------------------------------------
 
     # Expectations
@@ -514,7 +514,7 @@ describe 'ActiveRecord Obstacle Course' do
     expect(ordered_items_names).to_not include(unordered_items)
   end
 
-  xit '27. returns a table of information for all users orders' do
+  it '27. returns a table of information for all users orders' do
     custom_results = [user_3, user_1, user_2]
 
     # using a single ActiveRecord call, fetch a joined object that mimics the
@@ -526,7 +526,10 @@ describe 'ActiveRecord Obstacle Course' do
     # Sal        |         5
 
     # ------------------ ActiveRecord Solution ----------------------
-    # custom_results =
+     custom_results = Order.joins(:user)
+                          .group(:user_id)
+                          .order('name')
+                          .select('users.name as name', 'count(*) as total_order_count')
     # ---------------------------------------------------------------
 
     expect(custom_results[0].name).to eq(user_3.name)
