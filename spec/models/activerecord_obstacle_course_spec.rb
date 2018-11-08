@@ -42,8 +42,8 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    orders_of_200 = Order.where('amount = 200')
-    orders_of_500 = Order.where('amount = 500')
+    orders_of_200 = Order.where(amount: 200)
+    orders_of_500 = Order.where(amount: 500)
     # ------------------------------------------------------------
 
     # Expectation
@@ -57,7 +57,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    order_id = Order.minimum(:id)
+    order_id = Order.order(:amount).limit(1).last.id
     # ------------------------------------------------------------
 
     # Expectation
@@ -70,7 +70,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    order_id = Order.maximum(:id)
+    order_id = Order.order(amount: :desc).limit(1).last.id
     # ------------------------------------------------------------
 
     # Expectation
@@ -152,7 +152,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-      orders_less_than_550 = Order.where("amount < 550")
+      orders_less_than_550 = Order.where('amount < ?', 550)
     # ------------------------------------------------------------
 
     # Expectation
@@ -167,7 +167,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-      orders_of_user_3 = Order.where('user_id = 3')
+      orders_of_user_3 = Order.where(user_id: 3)
     # ------------------------------------------------------------
 
     # Expectation
@@ -230,12 +230,11 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = [item_2, item_3, item_4, item_5]
 
     # ----------------------- Using Ruby -------------------------
-      order = Order.find(3)
 
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-      grouped_items = order.items.order(:name)
+      grouped_items = Order.find(3).items.order(:name)
     # ------------------------------------------------------------
 
     # Expectation
