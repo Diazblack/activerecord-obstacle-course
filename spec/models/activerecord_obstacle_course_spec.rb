@@ -122,7 +122,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    orders = Order.find(ids)
+    orders = Order.where(id: ids)
     # ------------------------------------------------------------
 
     # Expectation
@@ -137,7 +137,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    orders_between_700_and_1000 = Order.where("amount >= 700 and amount <= 1000")
+    orders_between_700_and_1000 = Order.where(amount: 700..1000)
     # ------------------------------------------------------------
 
     # Expectation
@@ -350,7 +350,7 @@ describe 'ActiveRecord Obstacle Course' do
     #   items_for_user_3_third_order = order.items.map(&:name) if idx == 2
     # end
     # ------------------------------------------------------------
-    items_for_user_3_third_order = Order.where('user_id = ?', 3).third.items.pluck(:name)
+    items_for_user_3_third_order = Order.where('user_id = ?', 3)[2].items.pluck(:name)
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
     # ------------------------------------------------------------
